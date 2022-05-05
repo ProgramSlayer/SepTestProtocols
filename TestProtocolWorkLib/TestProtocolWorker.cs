@@ -7,10 +7,26 @@ using System.Xml.Linq;
 
 namespace TestProtocolWorkLib
 {
+    /// <summary>
+    /// Класс для работы с файлами протоколов испытаний.
+    /// </summary>
     public static class TestProtocolWorker
     {
+        /// <summary>
+        /// Маска для поиска файлов протоколов.
+        /// </summary>
         public const string TestProtocolSearchPattern = "*.sep";
+        
+        /// <summary>
+        /// Расширение файла протокола.
+        /// </summary>
         public const string TestProtocolFileExtension = ".sep";
+        
+        /// <summary>
+        /// Возвращает массив файлов протоколов испытаний из папки <paramref name="dirPath"/>.
+        /// </summary>
+        /// <param name="dirPath">Полный путь папки.</param>
+        /// <returns>Массив файлов.</returns>
         public static FileInfo[] GetTestProtocolsFilesFromDirectory(string dirPath)
         {
             DirectoryInfo dirInfo = new(dirPath);
