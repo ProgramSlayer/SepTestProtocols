@@ -1,0 +1,31 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.32407.337
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WpfSepSplittingApp", "WpfSepSplittingApp\WpfSepSplittingApp.csproj", "{AEB4A1AF-4BA1-43E5-9BDA-A91FC966015F}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TestProtocolWorkLib", "TestProtocolWorkLib\TestProtocolWorkLib.csproj", "{56930FC7-A4F0-473D-A720-01D142FE8032}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{AEB4A1AF-4BA1-43E5-9BDA-A91FC966015F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{AEB4A1AF-4BA1-43E5-9BDA-A91FC966015F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{AEB4A1AF-4BA1-43E5-9BDA-A91FC966015F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{AEB4A1AF-4BA1-43E5-9BDA-A91FC966015F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{56930FC7-A4F0-473D-A720-01D142FE8032}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{56930FC7-A4F0-473D-A720-01D142FE8032}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{56930FC7-A4F0-473D-A720-01D142FE8032}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{56930FC7-A4F0-473D-A720-01D142FE8032}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {390FFCD9-7102-4C69-868A-A5089B19490A}
+	EndGlobalSection
+EndGlobal
