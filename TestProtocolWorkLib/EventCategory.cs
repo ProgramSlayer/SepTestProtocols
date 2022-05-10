@@ -1,23 +1,60 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace TestProtocolWorkLib
 {
     public static class EventCategory
     {
+        /// <summary>
+        /// Перечисление с категориями событий.
+        /// </summary>
         [Flags]
         public enum EventCategories
         {
+            /// <summary>
+            /// Событие не относится ни к какой категории.
+            /// </summary>
             None = 0,
+
+            /// <summary>
+            /// Категория "Нарушитель".
+            /// </summary>
             Intruder = 1,
+
+            /// <summary>
+            /// Категория "Инженерно-технические средства охраны (ИТСО)".
+            /// </summary>
             SecurityDevices = 2,
+
+            /// <summary>
+            /// Категория "Оператор (СБ/СВН)".
+            /// </summary>
             Operator = 4,
+
+            /// <summary>
+            /// Категория "Группа реагирования".
+            /// </summary>
             Guards = 8,
+
+            /// <summary>
+            /// Событие относится к категориям <see cref="EventCategories.Intruder"/> / <see cref="EventCategories.Guards"/>.
+            /// </summary>
             IntruderGuards = Intruder | Guards,
-            SecurityDevicesOperator = SecurityDevices | Operator
+
+            /// <summary>
+            /// Событие относится к категориям <see cref="SecurityDevices"/> / <see cref="Operator"/>.
+            /// </summary>
+            SecurityDevicesOperator = SecurityDevices | Operator,
+
+            /// <summary>
+            /// Событие относится к категориям <see cref="Operator"/> / <see cref="Guards"/>.
+            /// </summary>
+            OperatorGuards = Operator | Guards,
+
+            /// <summary>
+            /// Событие относится к категориям <see cref="Intruder"/> / <see cref="SecurityDevices"/>.
+            /// </summary>
+            SecurityDevicesIntruder = Intruder | SecurityDevices,
         }
 
         public static readonly Dictionary<string, EventCategories> EventsCategoriesDictionary = new()
@@ -28,90 +65,95 @@ namespace TestProtocolWorkLib
             { "ExitFromZoneEvent", EventCategories.Intruder },
             { "ReduceDetSensWeatherEvent", EventCategories.None },
             { "ReduceDetSensPartnerEvent", EventCategories.None },
-            { "SignResetEvent", EventCategories.None },
-            { "MovToPointEvent", EventCategories.None },
+            { "SignResetEvent", EventCategories.SecurityDevicesOperator },
+            { "MovToPointEvent", EventCategories.Guards },
             { "SpecZoneNotAffVehEvent", EventCategories.None },
             { "SpecZoneAffVehEvent", EventCategories.None },
-            { "SpeedLimitToEvent", EventCategories.None },
-            { "SpeedMaxEvent", EventCategories.None },
-            { "SpeedValueEvent", EventCategories.None },
-            { "GetMarkingEvent", EventCategories.None },
-            { "AssSitEvent", EventCategories.None },
-            { "MoveToLastPointEvent", EventCategories.None },
-            { "IntruderVisThroughEvent", EventCategories.None },
-            { "InterceptStartEvent", EventCategories.None },
-            { "SwitchingTo", EventCategories.None },
-            { "VisContRestEvent", EventCategories.None },
-            { "TimeGatheringEvent", EventCategories.None },
-            { "MovToTargetEvent", EventCategories.None },
-            { "RuMovStartInterceptEvent", EventCategories.None },
-            { "RuMovInterceptEvent", EventCategories.None },
-            { "LeadAngleChangedEvent", EventCategories.None },
-            { "MarkingIgnEvent", EventCategories.None },
-            { "CoordMeasurEvent", EventCategories.None },
-            { "SignIssuedEvent", EventCategories.None },
-            { "DetNotWorkEvent", EventCategories.None },
-            { "FalseAlarmBackgrEvent", EventCategories.None },
-            { "FalseAlarmWeatherEvent", EventCategories.None },
-            { "RecogProbChangedEvent", EventCategories.None },
-            { "MarkingForRuEvent", EventCategories.None },
-            { "InspBeginEvent", EventCategories.None },
-            { "InspEndEvent", EventCategories.None },
-            { "ImgEvalStartEvent", EventCategories.None },
-            { "IntruderFoundInCamZoneEvent", EventCategories.None },
-            { "CamManualEvent", EventCategories.None },
-            { "SwToCamSetEvent", EventCategories.None },
-            { "ImgEvalEndEvent", EventCategories.None },
-            { "NoDetectEvent", EventCategories.None },
-            { "CamAutoEvent", EventCategories.None },
-            { "MoveEvent", EventCategories.None },
-            { "MoveToIntEvent", EventCategories.None },
-            { "MoveToTargEvent", EventCategories.None },
-            { "TargSuppEvent", EventCategories.None },
-            { "MoveRuEvent", EventCategories.None },
-            { "IntruderDetRuEvent", EventCategories.None },
-            { "FalseDetectionEvent", EventCategories.None },
-            { "AlarmEvent", EventCategories.None },
-            { "TimeDetermAreaEvent", EventCategories.None },
-            { "AreaDetermEvent", EventCategories.None },
-            { "TimeAreaInspectEvent", EventCategories.None },
-            { "AreaInspectEvent", EventCategories.None },
-            { "TimeDecisionEvent", EventCategories.None },
-            { "SignAcceptEvent", EventCategories.None },
-            { "FalseAlarmEvent", EventCategories.None },
-            { "AreaOutOfCamEvent", EventCategories.None },
-            { "SpeedIncEvent", EventCategories.None },
-            { "SpeedDecEvent", EventCategories.None },
-            { "SpeedIncVehEvent", EventCategories.None },
-            { "SpeedDecEquipEvent", EventCategories.None },
-            { "RamOvercomeEvent", EventCategories.None },
-            { "ImpossOvercomeEvent", EventCategories.None },
-            { "BarrierOverBeginEvent", EventCategories.None },
-            { "BarrierOverEndEvent", EventCategories.None },
-            { "BarrierOverMiddleEvent", EventCategories.None },
-            { "HurdleEntryBeginEvent", EventCategories.None },
-            { "HurdleEntryEndEvent", EventCategories.None },
-            { "HurdleExitBeginEvent", EventCategories.None },
-            { "HurdleExitEndEvent", EventCategories.None },
-            { "RuStartEvent", EventCategories.None },
-            { "EndPointPatrolEvent", EventCategories.None },
-            { "ContinuePatrolEvent", EventCategories.None },
-            { "BeginPatrolEvent", EventCategories.None },
-            { "VehAbandEvent", EventCategories.None },
-            { "HeavyEquipAbandEvent", EventCategories.None },
-            { "MediumEquipAband", EventCategories.None },
-            { "EasyEquipAbandEvent", EventCategories.None },
-            { "VisContactEvent", EventCategories.None },
-            { "NonPenetEvent", EventCategories.None },
-            { "ReducedCautionEvent", EventCategories.None },
-            { "DirectionChangedEvent", EventCategories.None },
-            { "DevEndEvent", EventCategories.None },
-            { "ContinMoveEvent", EventCategories.None },
-            { "PenetrationEvent", EventCategories.None },
-            { "IntruderNeutralizedEvent", EventCategories.None },
-            { "ExtSecurityCall", EventCategories.None },
-            { "EstimatedArrivalTime", EventCategories.None },
-            { "ExtSecurityArrival", EventCategories.None },
+            { "SpeedLimitToEvent", EventCategories.IntruderGuards },
+            { "SpeedMaxEvent", EventCategories.Guards }, // ?
+            { "SpeedValueEvent", EventCategories.IntruderGuards },
+            { "GetMarkingEvent", EventCategories.Guards },
+            { "AssSitEvent", EventCategories.Guards },
+            { "MoveToLastPointEvent", EventCategories.Guards },
+            { "IntruderVisEvent", EventCategories.Intruder },
+            { "IntruderVisThroughEvent", EventCategories.Intruder },
+            { "InterceptStartEvent", EventCategories.Guards }, // ?
+            { "SwitchingTo", EventCategories.Guards }, // ?
+            { "VisContRestEvent", EventCategories.Guards },
+            { "TimeGatheringEvent", EventCategories.Guards },
+            { "MovToTargetEvent", EventCategories.Guards },
+            { "RuMovStartInterceptEvent", EventCategories.Guards },
+            { "RuMovInterceptEvent", EventCategories.Guards }, // ?
+            { "LeadAngleChangedEvent", EventCategories.Guards },
+            { "MarkingIgnEvent", EventCategories.Guards },
+            { "CoordMeasurEvent", EventCategories.SecurityDevices }, // ?
+            { "SignIssuedEvent", EventCategories.SecurityDevices },
+            { "DetNotWorkEvent", EventCategories.SecurityDevices },
+            { "FalseAlarmBackgrEvent", EventCategories.SecurityDevices },
+            { "FalseAlarmWeatherEvent", EventCategories.SecurityDevices }, // ?
+            { "RecogProbChangedEvent", EventCategories.SecurityDevicesOperator }, // ?
+            { "MarkingForRuEvent", EventCategories.Operator }, // ?
+            { "InspBeginEvent", EventCategories.Operator },
+            { "InspEndEvent", EventCategories.Operator },
+            { "ImgEvalStartEvent", EventCategories.Operator },
+            { "IntruderFoundInCamZoneEvent", EventCategories.Operator }, // ?
+            { "CamManualEvent", EventCategories.Operator }, // ?
+            { "SwToCamSetEvent", EventCategories.Operator }, // ?
+            { "ImgEvalEndEvent", EventCategories.Operator },
+            { "CalcPropDetectEvent", EventCategories.Operator },
+            { "NoDetectEvent", EventCategories.Operator },
+            { "CamAutoEvent", EventCategories.Operator }, // ?
+            { "MoveEvent", EventCategories.Operator },
+            { "MoveToIntEvent", EventCategories.Operator }, // ?
+            { "MoveToTargEvent", EventCategories.Operator },
+            { "TargSuppEvent", EventCategories.Operator },
+            { "IntruderDetectedEvent", EventCategories.Operator },
+            { "MoveRuEvent", EventCategories.Operator }, // ?
+            { "IntruderDetRuEvent", EventCategories.OperatorGuards }, // ?
+            { "FalseDetectionEvent", EventCategories.Operator },
+            { "AlarmEvent", EventCategories.Operator },
+            { "TimeDetermAreaEvent", EventCategories.Operator },
+            { "AreaDetermEvent", EventCategories.Operator },
+            { "TimeAreaInspectEvent", EventCategories.Operator },
+            { "AreaInspectEvent", EventCategories.Operator },
+            { "TimeDecisionEvent", EventCategories.Operator },
+            { "SignAcceptEvent", EventCategories.SecurityDevicesOperator }, // ?
+            { "FalseAlarmEvent", EventCategories.Operator },
+            { "AreaOutOfCamEvent", EventCategories.Operator },
+            { "SpeedIncEvent", EventCategories.Intruder }, // ?
+            { "SpeedDecEvent", EventCategories.Intruder }, // ?
+            { "SpeedIncVehEvent", EventCategories.Intruder }, // ?
+            { "SpeedDecEquipEvent", EventCategories.Intruder }, // ?
+            { "RamOvercomeEvent", EventCategories.Intruder }, // ?
+            { "ImpossOvercomeEvent", EventCategories.Intruder }, // ?
+            { "ReducDelayEvent", EventCategories.SecurityDevicesIntruder }, // ?
+            { "BarrierOverBeginEvent", EventCategories.SecurityDevicesIntruder }, // ?
+            { "BarrierOverEndEvent", EventCategories.SecurityDevicesIntruder }, // ?
+            { "BarrierOverMiddleEvent", EventCategories.SecurityDevicesIntruder }, // ?
+            { "HurdleEntryBeginEvent", EventCategories.SecurityDevicesIntruder }, // ?
+            { "HurdleEntryEndEvent", EventCategories.SecurityDevicesIntruder }, // ?
+            { "HurdleExitBeginEvent", EventCategories.SecurityDevicesIntruder }, // ?
+            { "HurdleExitEndEvent", EventCategories.SecurityDevicesIntruder }, // ?
+            { "RuStartEvent", EventCategories.Guards },
+            { "EndPointPatrolEvent", EventCategories.Guards }, // ?
+            { "PostDelayEvent", EventCategories.Guards }, // ?
+            { "ContinuePatrolEvent", EventCategories.Guards }, // ?
+            { "BeginPatrolEvent", EventCategories.Guards }, // ?
+            { "VehAbandEvent", EventCategories.Intruder },
+            { "HeavyEquipAbandEvent", EventCategories.Intruder },
+            { "MediumEquipAband", EventCategories.Intruder },
+            { "EasyEquipAbandEvent", EventCategories.Intruder },
+            { "VisContactEvent", EventCategories.Intruder },
+            { "NonPenetEvent", EventCategories.IntruderGuards }, // ?
+            { "ReducedCautionEvent", EventCategories.Intruder },
+            { "DirectionChangedEvent", EventCategories.Intruder },
+            { "DevEndEvent", EventCategories.Intruder },
+            { "ContinMoveEvent", EventCategories.Intruder },
+            { "PenetrationEvent", EventCategories.IntruderGuards }, // ?
+            { "IntruderNeutralizedEvent", EventCategories.IntruderGuards }, // ?
+            { "ExtSecurityCall", EventCategories.Operator },
+            { "EstimatedArrivalTime", EventCategories.Guards },
+            { "ExtSecurityArrival", EventCategories.Guards }, // ?
         };
     }
 }
