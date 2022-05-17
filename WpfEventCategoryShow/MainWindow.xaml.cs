@@ -39,7 +39,10 @@ namespace WpfEventCategoryShow
                         categoriesNames.Add("Инженерно-технические средства охраны");
                         break;
                     case EventCategory.EventCategories.Operator:
-                        categoriesNames.AddRange(new string[] { "Оператор СБ", "Оператор СВН" });
+                        categoriesNames.Add("Оператор СБ");
+                        break;
+                    case EventCategory.EventCategories.OperatorCctv:
+                        categoriesNames.Add("Оператор СВН");
                         break;
                     case EventCategory.EventCategories.Guards:
                         categoriesNames.Add("Группа реагирования");

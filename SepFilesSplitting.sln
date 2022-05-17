@@ -7,7 +7,9 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WpfSepSplittingApp", "WpfSe
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TestProtocolWorkLib", "TestProtocolWorkLib\TestProtocolWorkLib.csproj", "{56930FC7-A4F0-473D-A720-01D142FE8032}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WpfEventCategoryShow", "WpfEventCategoryShow\WpfEventCategoryShow.csproj", "{F567CF4E-13D1-4EF1-A54F-2485C96A31CA}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WpfEventCategoryShow", "WpfEventCategoryShow\WpfEventCategoryShow.csproj", "{F567CF4E-13D1-4EF1-A54F-2485C96A31CA}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WpfSwimlanesSample", "WpfSwimlanesSample\WpfSwimlanesSample.csproj", "{8ACA5D18-BAF3-4928-8AD6-A382837FA704}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -27,6 +29,10 @@ Global
 		{F567CF4E-13D1-4EF1-A54F-2485C96A31CA}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{F567CF4E-13D1-4EF1-A54F-2485C96A31CA}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{F567CF4E-13D1-4EF1-A54F-2485C96A31CA}.Release|Any CPU.Build.0 = Release|Any CPU
+		{8ACA5D18-BAF3-4928-8AD6-A382837FA704}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8ACA5D18-BAF3-4928-8AD6-A382837FA704}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8ACA5D18-BAF3-4928-8AD6-A382837FA704}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8ACA5D18-BAF3-4928-8AD6-A382837FA704}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

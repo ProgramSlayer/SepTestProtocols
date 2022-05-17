@@ -27,14 +27,19 @@ namespace TestProtocolWorkLib
             SecurityDevices = 2,
 
             /// <summary>
-            /// Категория "Оператор (СБ/СВН)".
+            /// Категория "Оператор СБ".
             /// </summary>
             Operator = 4,
 
             /// <summary>
+            /// Категория "Оператор СВН".
+            /// </summary>
+            OperatorCctv = 8,
+
+            /// <summary>
             /// Категория "Группа реагирования".
             /// </summary>
-            Guards = 8,
+            Guards = 16,
 
             /// <summary>
             /// Событие относится к категориям <see cref="EventCategories.Intruder"/> / <see cref="EventCategories.Guards"/>.
