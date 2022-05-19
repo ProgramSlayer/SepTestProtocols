@@ -1,0 +1,29 @@
+﻿<Window x:Class="WpfEventsReader.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:WpfEventsReader"
+        mc:Ignorable="d"
+        Title="MainWindow" Height="450" Width="450">
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="10"/>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="10"/>
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="10"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="6*"/>
+            <RowDefinition Height="10"/>
+        </Grid.RowDefinitions>
+        <Button x:Name="btnOpenFile" Click="btnOpenFile_Click" Content="Открыть файл испытания" Grid.Column="1" Grid.Row="1"/>
+        <DataGrid x:Name="dgEvents" AutoGenerateColumns="False" Grid.Column="1" Grid.Row="2">
+            <DataGrid.Columns>
+                <DataGridTextColumn Header="Событие" Binding="{Binding Name}"/>
+                <DataGridTextColumn Header="Время" Binding="{Binding CTime}"/>
+            </DataGrid.Columns>
+        </DataGrid>
+    </Grid>
+</Window>
