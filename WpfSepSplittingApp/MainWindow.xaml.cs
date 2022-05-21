@@ -78,10 +78,11 @@ namespace WpfSepSplittingApp
             try
             {
                 XDocument tProtDoc = TestProtocolWorker.LoadTestProtocol(selectedTestProtocolSepFile.FullName, Encoding.GetEncoding(1251));
+                TestProtocolWorker.RemoveUselessTagsFromTestProtocol(tProtDoc);
                 XElement[] elems = TestProtocolWorker.SplitTestProtocol(tProtDoc);
                 foreach (XElement el in elems)
                 {
-                    TestProtocolWorker.RemoveUnnecessaryTagsFromTest(el);
+                    //TestProtocolWorker.RemoveUnnecessaryTagsFromTest(el);
                     TestProtocolWorker.SetTestComplecityMarkerTag(el);
                 }
                 TestProtocolWorker.SaveSplitTestProtocol(Path.GetFileNameWithoutExtension(selectedTestProtocolSepFile.FullName), ResultDirectoryPath, elems);

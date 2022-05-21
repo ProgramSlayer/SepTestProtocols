@@ -77,6 +77,64 @@ namespace TestProtocolWorkLib
             }
         }
 
+        public static void RemoveUselessTagsFromTestProtocol(XDocument protocol)
+        {
+            if (protocol is null)
+            {
+                throw new ArgumentNullException(nameof(protocol), "Протокол - нулевая ссылка");
+            }
+
+            XElement root = protocol.Root;
+
+            if (root != null)
+            {
+                XElement[] childNodes = root.Elements("Test").ToArray();
+                foreach (XElement node in childNodes)
+                {
+                    RemoveUnnecessaryTagsFromTest(node);
+                }
+                root.RemoveNodes();
+                root.AddFirst(childNodes);
+            }
+        }
+
+        public static void RemoveUnnecessaryTagsFromTest(XElement test)
+        {
+            if (test?.Name == "Test")
+            {
+                XElement eventsNode = test.Element("Events");
+                if (eventsNode is not null)
+                {
+                    XElement[] events = (from ev in eventsNode.Elements() select ev).ToArray();
+                    eventsNode.RemoveNodes();
+                    test.RemoveNodes();
+                    eventsNode.AddFirst(events);
+                    test.AddFirst(eventsNode);
+                }
+            }
+        }
+
+        public static readonly string[] ComplecityMarkersEventTags = { "NonPenetEvent", "PenetrationEvent", "IntruderNeutralizedEvent" };
+
+        public static void SetTestComplecityMarkerTag(XElement test)
+        {
+            if (test?.Name == "Test")
+            {
+                IEnumerable<XElement> necessaryEvents = from ev in test
+                                                        .Elements("Events")
+                                                        .Elements() 
+                                                        where ComplecityMarkersEventTags.Contains(ev.Name.LocalName) 
+                                                        select ev;
+                if (necessaryEvents.Any())
+                {
+                    test.AddFirst(new XElement("IsComplete", "true"));
+                }
+                else
+                {
+                    test.AddFirst(new XElement("IsComplete", "false"));
+                }
+            }
+        }
         public static XElement[] SplitTestProtocol(XDocument protocol)
         {
             if (protocol is null)
@@ -96,37 +154,7 @@ namespace TestProtocolWorkLib
             return elements;
         }
 
-        public static void RemoveUnnecessaryTagsFromTest(XElement test)
-        {
-            if (test?.Name == "Test")
-            {
-                XElement eventsNode = test.Element("Events");
-                if (eventsNode is not null)
-                {
-                    XElement[] necessaryEvents = (from ev in eventsNode.Elements() select ev).ToArray();
-                    eventsNode.RemoveNodes();
-                    test.RemoveNodes();
-                    eventsNode.AddFirst(necessaryEvents);
-                    test.AddFirst(eventsNode);
-                }
-            }
-        }
 
-        public static void SetTestComplecityMarkerTag(XElement test)
-        {
-            if (test?.Name == "Test")
-            {
-                IEnumerable<XElement> necessaryEvents = from ev in test.Elements("Events").Elements() where ComplecityMarkersEventTags.Contains(ev.Name.LocalName) select ev;
-                if (necessaryEvents.Any())
-                {
-                    test.AddFirst(new XElement("IsComplete", "true"));
-                }
-                else
-                {
-                    test.AddFirst(new XElement("IsComplete", "false"));
-                }
-            }
-        }
 
         public static void SaveSplitTestProtocol(string testProtocolName, string destinationFolderPath, XElement[] elems)
         {
@@ -170,6 +198,5 @@ namespace TestProtocolWorkLib
             }
         }
 
-        public static readonly string[] ComplecityMarkersEventTags = { "NonPenetEvent", "PenetrationEvent", "IntruderNeutralizedEvent" };
     }
 }
