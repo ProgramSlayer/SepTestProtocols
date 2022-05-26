@@ -32,23 +32,28 @@ namespace WpfEventsReader
         private class TestEvent
         {
             public string Name { get; set; }
-            public string CTime { get; set; }
+            public float CTime { get; set; }
+            public string Category { get; set; }
         }
 
         private void btnOpenFile_Click(object sender, RoutedEventArgs e)
         {
-            using (OpenFileDialog ofd = new() { CheckFileExists = true, CheckPathExists = true, Filter = "XML-файлы (*.xml)|*.xml" })
+            using OpenFileDialog ofd = new() { CheckFileExists = true, CheckPathExists = true, Filter = "XML-файлы (*.xml)|*.xml" };
+            if (ofd.ShowDialog() == System.Windows.Forms.DialogResult.OK)
             {
-                if (ofd.ShowDialog() == System.Windows.Forms.DialogResult.OK)
-                {
-                    string path = ofd.FileName;
-                    XElement test = EventsReader.ReadTest(path, Encoding.UTF8);
-                    XElement[] events = EventsReader.GetEvents(test);
-                    TestEvent[] source = (from ev in events
-                                          select new TestEvent { Name = ev.Name.LocalName, CTime = ev.Attribute("Ctime").Value })
-                                          .ToArray();
-                    dgEvents.ItemsSource = source;
-                }
+                string path = ofd.FileName;
+                XElement test = EventsReader.ReadTest(path, Encoding.UTF8);
+                XElement[] events = EventsReader.GetEvents(test);
+                TestEvent[] source = (from ev in events
+                                      select new TestEvent
+                                      {
+                                          Name = ev.Name.LocalName,
+                                          // TODO: избавиться от костыля.
+                                          CTime = float.Parse(ev.Attribute("Ctime").Value.Replace('.', ',')),
+                                          Category = EventCategory.EventsCategoriesDictionary[ev.Name.LocalName].ToString()
+                                      })
+                                      .ToArray();
+                dgEvents.ItemsSource = source;
             }
         }
     }

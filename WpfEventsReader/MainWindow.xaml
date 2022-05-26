@@ -23,6 +23,7 @@
             <DataGrid.Columns>
                 <DataGridTextColumn Header="Событие" Binding="{Binding Name}"/>
                 <DataGridTextColumn Header="Время" Binding="{Binding CTime}"/>
+                <DataGridTextColumn Header="Категория" Binding="{Binding Category}"/>
             </DataGrid.Columns>
         </DataGrid>
     </Grid>
