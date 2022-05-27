@@ -1,9 +1,12 @@
-﻿using System.Linq;
+﻿using System.Collections.Generic;
+using System.Linq;
 using System.Text;
 using System.Windows;
 using System.Windows.Forms;
 using System.Xml.Linq;
 using TestProtocolWorkLib;
+using WpfEventsReader.Models;
+using WpfEventsReader.ViewModels;
 
 namespace WpfEventsReader
 {
@@ -18,31 +21,17 @@ namespace WpfEventsReader
             //Encoding.RegisterProvider(CodePagesEncodingProvider.Instance);
         }
 
-        private class TestEvent
+        private void btnReadTest_Click(object sender, RoutedEventArgs e)
         {
-            public string Name { get; set; }
-            public float CTime { get; set; }
-            public string Category { get; set; }
-        }
-
-        private void btnOpenFile_Click(object sender, RoutedEventArgs e)
-        {
-            using OpenFileDialog ofd = new() { CheckFileExists = true, CheckPathExists = true, Filter = "XML-файлы (*.xml)|*.xml" };
-            if (ofd.ShowDialog() == System.Windows.Forms.DialogResult.OK)
+            using OpenFileDialog openFile = new() { CheckFileExists = true, CheckPathExists = true, Filter = "XML-файлы (*.xml)|*.xml" };
+            if (openFile.ShowDialog() == System.Windows.Forms.DialogResult.OK)
             {
-                string path = ofd.FileName;
-                XElement test = EventsReader.ReadTest(path, Encoding.UTF8);
-                XElement[] events = EventsReader.GetEvents(test);
-                TestEvent[] source = (from ev in events
-                                      select new TestEvent
-                                      {
-                                          Name = ev.Name.LocalName,
-                                          // TODO: избавиться от костыля.
-                                          CTime = float.Parse(ev.Attribute("Ctime").Value.Replace('.', ',')),
-                                          Category = EventCategory.EventsCategoriesDictionary[ev.Name.LocalName].ToString()
-                                      })
-                                      .ToArray();
-                dgEvents.ItemsSource = source;
+                string path = openFile.FileName;
+                XElement xTest = EventsReader.ReadTest(path, Encoding.UTF8);
+                XElement[] xEvents = EventsReader.GetEvents(xTest);
+                //IEnumerable<EventModel> source = from xEv in xEvents select new EventModel(xEv);
+                var source = from xEv in xEvents select new EventViewModel(xEv);
+                dgEventsTable.ItemsSource = source;
             }
         }
     }

@@ -10,20 +10,36 @@
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="10"/>
             <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="*"/>
             <ColumnDefinition Width="10"/>
         </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
             <RowDefinition Height="10"/>
             <RowDefinition Height="*"/>
-            <RowDefinition Height="6*"/>
+            <RowDefinition Height="8*"/>
             <RowDefinition Height="10"/>
         </Grid.RowDefinitions>
-        <Button x:Name="btnOpenFile" Click="btnOpenFile_Click" Content="Открыть файл испытания" Grid.Column="1" Grid.Row="1"/>
-        <DataGrid x:Name="dgEvents" AutoGenerateColumns="False" Grid.Column="1" Grid.Row="2">
+        <Button x:Name="btnReadTest" Click="btnReadTest_Click" Content="Открыть" Margin="5" Grid.Column="5" Grid.Row="1"/>
+        <DataGrid
+            Grid.Row="2"
+            Grid.Column="1"
+            Grid.ColumnSpan="5"
+            ItemsSource="{Binding}"
+            x:Name="dgEventsTable"
+            AutoGenerateColumns="False"
+            IsReadOnly="True">
             <DataGrid.Columns>
-                <DataGridTextColumn Header="Событие" Binding="{Binding Name}"/>
-                <DataGridTextColumn Header="Время" Binding="{Binding CTime}"/>
-                <DataGridTextColumn Header="Категория" Binding="{Binding Category}"/>
+                <DataGridTextColumn Header="Время" Binding="{Binding EventModel.Ctime}" CanUserSort="False"/>
+                <DataGridTemplateColumn Header="Событие">
+                    <DataGridTemplateColumn.CellTemplate>
+                        <DataTemplate>
+                            <Rectangle Fill="Green" Margin="4" Stroke="Black" ToolTip="{Binding ToolTip}"/>
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellTemplate>
+                </DataGridTemplateColumn>
             </DataGrid.Columns>
         </DataGrid>
     </Grid>
