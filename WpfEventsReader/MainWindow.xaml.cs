@@ -6,7 +6,7 @@ using System.Windows.Forms;
 using System.Xml.Linq;
 using TestProtocolWorkLib;
 using WpfEventsReader.Models;
-using WpfEventsReader.ViewModels;
+using WpfEventsReader.Services;
 
 namespace WpfEventsReader
 {
@@ -18,20 +18,28 @@ namespace WpfEventsReader
         public MainWindow()
         {
             InitializeComponent();
-            //Encoding.RegisterProvider(CodePagesEncodingProvider.Instance);
         }
 
-        private void btnReadTest_Click(object sender, RoutedEventArgs e)
+        private void btnReadFile_Click(object sender, RoutedEventArgs e)
         {
             using OpenFileDialog openFile = new() { CheckFileExists = true, CheckPathExists = true, Filter = "XML-файлы (*.xml)|*.xml" };
             if (openFile.ShowDialog() == System.Windows.Forms.DialogResult.OK)
             {
                 string path = openFile.FileName;
-                XElement xTest = EventsReader.ReadTest(path, Encoding.UTF8);
-                XElement[] xEvents = EventsReader.GetEvents(xTest);
-                //IEnumerable<EventModel> source = from xEv in xEvents select new EventModel(xEv);
-                var source = from xEv in xEvents select new EventViewModel(xEv);
-                dgEventsTable.ItemsSource = source;
+                XElement[] xEvents = EventsReader.ReadEvents(path, Encoding.UTF8);
+                EventModel[] eventModels = EventModelFactory.Manufacture(xEvents);
+
+                IEnumerable<string> timestamps = (from ev in eventModels select ev.Ctime).Distinct();
+
+                List<TimelineRowModel> source = new();
+
+                foreach (string ts in timestamps)
+                {
+                    EventModel[] tlRow = (from ev in eventModels where ev.Ctime == ts select ev).ToArray();
+                    source.Add(new TimelineRowModel(tlRow));
+                }
+
+                dgTimeLine.ItemsSource = source;
             }
         }
     }

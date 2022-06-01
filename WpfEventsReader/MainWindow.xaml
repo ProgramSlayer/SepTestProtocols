@@ -5,7 +5,29 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:WpfEventsReader"
         mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="450">
+        Title="MainWindow" Height="450" Width="800">
+    <Window.Resources>
+        <Style x:Key="rectangleStyle"
+               TargetType="Rectangle">
+            <Style.Triggers>
+                <Trigger Property="ToolTip" Value="">
+                    <Setter Property="Fill" Value="White"/>
+                    <Setter Property="Stroke" Value="White"/>
+                    <Setter Property="StrokeThickness" Value="0"/>
+                    <Setter Property="ToolTip.Visibility" Value="Hidden"/>
+                </Trigger>
+            </Style.Triggers>
+            <Style.Setters>
+                <Setter Property="Fill" Value="Green"/>
+                <Setter Property="Stroke" Value="Black"/>
+                <Setter Property="StrokeThickness" Value="1"/>
+                <Setter Property="Width" Value="50"/>
+                <Setter Property="Height" Value="50"/>
+                <Setter Property="Margin" Value="5"/>
+            </Style.Setters>
+        </Style>
+    </Window.Resources>
+
     <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="10"/>
@@ -19,27 +41,75 @@
         <Grid.RowDefinitions>
             <RowDefinition Height="10"/>
             <RowDefinition Height="*"/>
-            <RowDefinition Height="8*"/>
+            <RowDefinition Height="9*"/>
             <RowDefinition Height="10"/>
         </Grid.RowDefinitions>
-        <Button x:Name="btnReadTest" Click="btnReadTest_Click" Content="Открыть" Margin="5" Grid.Column="5" Grid.Row="1"/>
-        <DataGrid
-            Grid.Row="2"
-            Grid.Column="1"
-            Grid.ColumnSpan="5"
-            ItemsSource="{Binding}"
-            x:Name="dgEventsTable"
-            AutoGenerateColumns="False"
-            IsReadOnly="True">
+
+        <Button x:Name="btnReadFile" Content="Открыть файл испытания"
+                Click="btnReadFile_Click"
+                Grid.Row="1"
+                Grid.Column="5"
+                Margin="5"/>
+
+        <DataGrid Name="dgTimeLine"
+                  IsReadOnly="True"
+                  CanUserSortColumns="False"
+                  AutoGenerateColumns="False"
+                  Grid.Row="2"
+                  Grid.Column="1"
+                  Grid.ColumnSpan="5">
             <DataGrid.Columns>
-                <DataGridTextColumn Header="Время" Binding="{Binding EventModel.Ctime}" CanUserSort="False"/>
-                <DataGridTemplateColumn Header="Событие">
+                <DataGridTextColumn Header="Time" 
+                                    Binding="{Binding Time}"/>
+                <DataGridTemplateColumn Header="None">
                     <DataGridTemplateColumn.CellTemplate>
                         <DataTemplate>
-                            <Rectangle Fill="Green" Margin="4" Stroke="Black" ToolTip="{Binding ToolTip}"/>
+                            <Rectangle ToolTip="{Binding DescriptionCategoryNone}"
+                                       Style="{StaticResource rectangleStyle}"/>
                         </DataTemplate>
                     </DataGridTemplateColumn.CellTemplate>
                 </DataGridTemplateColumn>
+                <DataGridTemplateColumn Header="Intruder">
+                    <DataGridTemplateColumn.CellTemplate>
+                        <DataTemplate>
+                            <Rectangle ToolTip="{Binding DescriptionCategoryIntruder}"
+                                       Style="{StaticResource rectangleStyle}"/>
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellTemplate>
+                </DataGridTemplateColumn>
+                <DataGridTemplateColumn Header="Security Devices">
+                    <DataGridTemplateColumn.CellTemplate>
+                        <DataTemplate>
+                            <Rectangle ToolTip="{Binding DescriptionCategorySecurityDevices}"
+                                       Style="{StaticResource rectangleStyle}"/>
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellTemplate>
+                </DataGridTemplateColumn>
+                <DataGridTemplateColumn Header="Operator CCTV">
+                    <DataGridTemplateColumn.CellTemplate>
+                        <DataTemplate>
+                            <Rectangle ToolTip="{Binding DescriptionCategoryOperatorCctv}"
+                                       Style="{StaticResource rectangleStyle}"/>
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellTemplate>
+                </DataGridTemplateColumn>
+                <DataGridTemplateColumn Header="Operator">
+                    <DataGridTemplateColumn.CellTemplate>
+                        <DataTemplate>
+                            <Rectangle ToolTip="{Binding DescriptionCategoryOperator}"
+                                       Style="{StaticResource rectangleStyle}"/>
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellTemplate>
+                </DataGridTemplateColumn>
+                <DataGridTemplateColumn Header="Guards">
+                    <DataGridTemplateColumn.CellTemplate>
+                        <DataTemplate>
+                            <Rectangle ToolTip="{Binding DescriptionCategoryGuards}"
+                                       Style="{StaticResource rectangleStyle}"/>
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellTemplate>
+                </DataGridTemplateColumn>
+
             </DataGrid.Columns>
         </DataGrid>
     </Grid>
