@@ -8,20 +8,11 @@ namespace TestProtocolWorkLib
 {
     public static class EventsReader
     {
-        public static XElement ReadTest(string filePath, Encoding encoding)
+        public static XElement[] ReadEvents(string fileName, Encoding encoding)
         {
-            // TODO: добавить проверки.
-
-            using StreamReader reader = new(filePath, encoding);
+            using StreamReader reader = new(fileName, encoding);
             XElement test = XElement.Load(reader);
-            return test;
-        }
-
-        public static XElement[] GetEvents(XElement test)
-        {
-            // TODO: добавить проверки.
-
-            IEnumerable<XElement> events = test.Elements("Events").Elements();
+            IEnumerable<XElement> events = from el in test.Elements("Events").Elements() select el;
             return events.ToArray();
         }
     }
