@@ -16,6 +16,7 @@ namespace WpfEventsReader.Services
                                                   Name = ev.Name.LocalName,
                                                   Ctime = ev.Attribute("Ctime").Value,
                                                   Category = EventCategory.EventsCategoriesDictionary[ev.Name.LocalName],
+                                                  CcIndex = int.Parse(ev.Attribute("CcIndex").Value)
                                               };
             return product.ToArray();
         }
