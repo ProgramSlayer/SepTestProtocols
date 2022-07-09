@@ -46,6 +46,14 @@
             <RowDefinition Height="10"/>
         </Grid.RowDefinitions>
 
+        <TextBlock x:Name="tbFileName"
+                   Grid.Row="1"
+                   Grid.Column="1"
+                   Grid.ColumnSpan="3"
+                   Margin="5"
+                   FontSize="14"
+                   TextWrapping="Wrap"/>
+
         <Button x:Name="btnReadFile" Content="Открыть файл испытания"
                 Click="btnReadFile_Click"
                 Grid.Row="1"
