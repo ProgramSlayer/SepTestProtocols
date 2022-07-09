@@ -9,6 +9,8 @@ namespace WpfEventsReader.Models
 
         public EventCategory.EventCategories Category { get; set; }
 
-        public string Description => $"Название события: {Name}\nВремя события: {Ctime}\nКатегория события: {Category}";
+        public int CcIndex { get; set; } = 0;
+
+        public string Description => $"Название события: {Name}\nВремя события: {Ctime}\nКатегория события: {Category}\nCcIndex: {CcIndex}";
     }
 }
