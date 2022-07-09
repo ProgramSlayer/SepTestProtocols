@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Windows;
@@ -26,20 +27,28 @@ namespace WpfEventsReader
             if (openFile.ShowDialog() == System.Windows.Forms.DialogResult.OK)
             {
                 string path = openFile.FileName;
-                XElement[] xEvents = EventsReader.ReadEvents(path, Encoding.UTF8);
-                EventModel[] eventModels = EventModelFactory.Manufacture(xEvents);
-
-                IEnumerable<string> timestamps = (from ev in eventModels select ev.Ctime).Distinct();
-
-                List<TimelineRowModel> source = new();
-
-                foreach (string ts in timestamps)
+                try
                 {
-                    EventModel[] tlRow = (from ev in eventModels where ev.Ctime == ts select ev).ToArray();
-                    source.Add(new TimelineRowModel(tlRow));
-                }
+                    XElement[] xEvents = EventsReader.ReadEvents(path, Encoding.UTF8);
+                    EventModel[] eventModels = EventModelFactory.Manufacture(xEvents);
 
-                dgTimeLine.ItemsSource = source;
+                    IEnumerable<string> timestamps = (from ev in eventModels select ev.Ctime).Distinct();
+
+                    List<TimelineRowModel> source = new();
+
+                    foreach (string ts in timestamps)
+                    {
+                        EventModel[] tlRow = (from ev in eventModels where ev.Ctime == ts select ev).ToArray();
+                        source.Add(new TimelineRowModel(tlRow));
+                    }
+
+                    dgTimeLine.ItemsSource = source;
+                    tbFileName.Text = path;
+                }
+                catch (Exception exc)
+                {
+                    _ = System.Windows.MessageBox.Show(exc.Message, "Ошибка открытия файла испытания", button: MessageBoxButton.OK, icon: MessageBoxImage.Error);
+                }
             }
         }
     }
