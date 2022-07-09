@@ -159,6 +159,10 @@ namespace TestProtocolWorkLib
             { "ExtSecurityCall", EventCategories.Operator },
             { "EstimatedArrivalTime", EventCategories.Guards },
             { "ExtSecurityArrival", EventCategories.Guards }, // ?
+            { "SpecZoneEntryBeginEvent", EventCategories.None }, // ?
+            { "SpecZoneEntryEndEvent", EventCategories.None }, // ?
+            { "SpecZoneExitBeginEvent", EventCategories.None }, // ?
+            { "SpecZoneExitEndEvent", EventCategories.None }, // ?
         };
     }
 }
