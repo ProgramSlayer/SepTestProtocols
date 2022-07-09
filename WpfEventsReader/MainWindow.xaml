@@ -5,7 +5,8 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:WpfEventsReader"
         mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="800">
+        Title="MainWindow" Height="450" Width="800"
+        FontSize="18">
     <Window.Resources>
         <Style x:Key="rectangleStyle"
                TargetType="Rectangle">
@@ -48,7 +49,8 @@
         <Button x:Name="btnReadFile" Content="Открыть файл испытания"
                 Click="btnReadFile_Click"
                 Grid.Row="1"
-                Grid.Column="5"
+                Grid.Column="4"
+                Grid.ColumnSpan="2"
                 Margin="5"/>
 
         <DataGrid Name="dgTimeLine"
@@ -64,48 +66,115 @@
                 <DataGridTemplateColumn Header="None">
                     <DataGridTemplateColumn.CellTemplate>
                         <DataTemplate>
-                            <Rectangle ToolTip="{Binding DescriptionCategoryNone}"
-                                       Style="{StaticResource rectangleStyle}"/>
+                            <Grid>
+                                <Rectangle ToolTip="{Binding DescriptionCategoryNone}"
+                                           Style="{StaticResource rectangleStyle}"/>
+                                <TextBlock Text="{Binding CategoryNoneCcIndexes}"
+                                           Margin="5"
+                                           IsHitTestVisible="False"
+                                           Foreground="White"
+                                           HorizontalAlignment="Center"
+                                           VerticalAlignment="Center"
+                                           />
+                            </Grid>
+                            <!--<Rectangle ToolTip="{Binding DescriptionCategoryNone}"
+                                       Style="{StaticResource rectangleStyle}"
+                                       />-->
                         </DataTemplate>
                     </DataGridTemplateColumn.CellTemplate>
                 </DataGridTemplateColumn>
                 <DataGridTemplateColumn Header="Intruder">
                     <DataGridTemplateColumn.CellTemplate>
                         <DataTemplate>
-                            <Rectangle ToolTip="{Binding DescriptionCategoryIntruder}"
-                                       Style="{StaticResource rectangleStyle}"/>
+                            <Grid>
+                                <Rectangle ToolTip="{Binding DescriptionCategoryIntruder}"
+                                           Style="{StaticResource rectangleStyle}"/>
+                                <TextBlock Text="{Binding CategoryIntruderCcIndexes}"
+                                           Margin="5"
+                                           IsHitTestVisible="False"
+                                           Foreground="White"
+                                           HorizontalAlignment="Center"
+                                           VerticalAlignment="Center"
+                                           />
+                            </Grid>
+                            <!--<Rectangle ToolTip="{Binding DescriptionCategoryIntruder}"
+                                       Style="{StaticResource rectangleStyle}"/>-->
                         </DataTemplate>
                     </DataGridTemplateColumn.CellTemplate>
                 </DataGridTemplateColumn>
                 <DataGridTemplateColumn Header="Security Devices">
                     <DataGridTemplateColumn.CellTemplate>
                         <DataTemplate>
-                            <Rectangle ToolTip="{Binding DescriptionCategorySecurityDevices}"
-                                       Style="{StaticResource rectangleStyle}"/>
+                            <Grid>
+                                <Rectangle ToolTip="{Binding DescriptionCategorySecurityDevices}"
+                                           Style="{StaticResource rectangleStyle}"/>
+                                <TextBlock Text="{Binding CategorySecurityDevicesCcIndexes}"
+                                           Margin="5"
+                                           IsHitTestVisible="False"
+                                           Foreground="White"
+                                           HorizontalAlignment="Center"
+                                           VerticalAlignment="Center"
+                                           />
+                            </Grid>
+                            <!--<Rectangle ToolTip="{Binding DescriptionCategorySecurityDevices}"
+                                       Style="{StaticResource rectangleStyle}"/>-->
                         </DataTemplate>
                     </DataGridTemplateColumn.CellTemplate>
                 </DataGridTemplateColumn>
                 <DataGridTemplateColumn Header="Operator CCTV">
                     <DataGridTemplateColumn.CellTemplate>
                         <DataTemplate>
-                            <Rectangle ToolTip="{Binding DescriptionCategoryOperatorCctv}"
-                                       Style="{StaticResource rectangleStyle}"/>
+                            <Grid>
+                                <Rectangle ToolTip="{Binding DescriptionCategoryOperatorCctv}"
+                                           Style="{StaticResource rectangleStyle}"/>
+                                <TextBlock Text="{Binding CategoryOperatorCctvCcIndexes}"
+                                           Margin="5"
+                                           IsHitTestVisible="False"
+                                           Foreground="White"
+                                           HorizontalAlignment="Center"
+                                           VerticalAlignment="Center"
+                                           />
+                            </Grid>
+                            <!--<Rectangle ToolTip="{Binding DescriptionCategoryOperatorCctv}"
+                                       Style="{StaticResource rectangleStyle}"/>-->
                         </DataTemplate>
                     </DataGridTemplateColumn.CellTemplate>
                 </DataGridTemplateColumn>
                 <DataGridTemplateColumn Header="Operator">
                     <DataGridTemplateColumn.CellTemplate>
                         <DataTemplate>
-                            <Rectangle ToolTip="{Binding DescriptionCategoryOperator}"
-                                       Style="{StaticResource rectangleStyle}"/>
+                            <Grid>
+                                <Rectangle ToolTip="{Binding DescriptionCategoryOperator}"
+                                           Style="{StaticResource rectangleStyle}"/>
+                                <TextBlock Text="{Binding CategoryOperatorCcIndexes}"
+                                           Margin="5"
+                                           IsHitTestVisible="False"
+                                           Foreground="White"
+                                           HorizontalAlignment="Center"
+                                           VerticalAlignment="Center"
+                                           />
+                            </Grid>
+                            <!--<Rectangle ToolTip="{Binding DescriptionCategoryOperator}"
+                                       Style="{StaticResource rectangleStyle}"/>-->
                         </DataTemplate>
                     </DataGridTemplateColumn.CellTemplate>
                 </DataGridTemplateColumn>
                 <DataGridTemplateColumn Header="Guards">
                     <DataGridTemplateColumn.CellTemplate>
                         <DataTemplate>
-                            <Rectangle ToolTip="{Binding DescriptionCategoryGuards}"
-                                       Style="{StaticResource rectangleStyle}"/>
+                            <Grid>
+                                <Rectangle ToolTip="{Binding DescriptionCategoryGuards}"
+                                           Style="{StaticResource rectangleStyle}"/>
+                                <TextBlock Text="{Binding CategoryGuardsCcIndexes}"
+                                           Margin="5"
+                                           IsHitTestVisible="False"
+                                           Foreground="White"
+                                           HorizontalAlignment="Center"
+                                           VerticalAlignment="Center"
+                                           />
+                            </Grid>
+                            <!--<Rectangle ToolTip="{Binding DescriptionCategoryGuards}"
+                                       Style="{StaticResource rectangleStyle}"/>-->
                         </DataTemplate>
                     </DataGridTemplateColumn.CellTemplate>
                 </DataGridTemplateColumn>
